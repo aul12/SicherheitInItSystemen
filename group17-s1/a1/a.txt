@@ -1,0 +1,29 @@
+Create AES key and IV:
+$ openssl enc -aes-256-cbc -pbkdf2 -P
+
+-aes-256-cbc specifies 256bit AES encryption
+-pbkdf2 specifies algorithm used to generate key. Password: 'SITcom'
+-P prints key and IV to standard output
+
+Encrypt text file:
+specify input (-in) and output file (-out) as well as key (-K) and IV (-iv)
+
+$ openssl enc -aes-256-cbc -in plaintext.txt -out a-enc-aes.txt -K EB46209563FC7F12A6F4EF32BF92CDFF965BE46427FAE16BFB49BC04A6E6F8C2 -iv 1CBE01D9411F49198D30EA0A490ED018
+
+Decrypt file to check if it worked:
+$ openssl enc -aes-256-cbc -d -in a-enc-aes.txt -K EB46209563FC7F12A6F4EF32BF92CDFF965BE46427FAE16BFB49BC04A6E6F8C2 -iv 1CBE01D9411F49198D30EA0A490ED018
+
+-d to decrypt
+
+
+
+Sources:
+https://eclipsesource.com/blogs/2017/01/17/tutorial-aes-encryption-and-decryption-with-openssl/
+
+https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.installpostcfg.doc/topics/t_einstall_GenerateAESkey.html
+
+
+
+
+
+
