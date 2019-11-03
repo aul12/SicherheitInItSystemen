@@ -1,0 +1,11 @@
+Installation Apache:
+Es wurde dieses Tutorial verwendet: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04-quickstart
+Apache wurde installiert mit: sudo apt install apache2
+Verifizierung der Installation mit: sudo systemctl status apache2
+
+Erstelle CA Certificate:
+Es wurde folgendes Tutorial verwendet: https://gist.github.com/Soarez/9688998
+Generiere Key: openssl genrsa -out ca.key 2048
+Generiere Sign-Request: openssl req -new -x509 -key ca.key -out ca.crt
+Sign: openssl x509 -req -in server.CA.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out example.org.crt
+
