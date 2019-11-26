@@ -1,0 +1,23 @@
+Q: If only Alice has some type of secret/private key, can she use it to give Bob her secret message?
+A: In case of AES, no. Both parties have to have the same secret key in order to en- and decrypt messages.
+   In case of RSA, also no. While Alice can use her private key to encrypt a message, it can be decrypted by everyone, including Eve
+   since everyone has access to the public key. Therefor the message's content would not be kept secret.
+
+Q: If only Bob has some type of secret/private key, can Alice use it to give Bob her secret message?
+A: In case of AES, no. See corresponding explanation above.
+   In case of RSA, yes. Since Alice has the public key, she can use it to encrypt the message. It can then only be read by Bob since
+   only he has access to the corresponding private key.
+
+Q: If Alice and Bob have a key of the same type, does the situation change?
+A: In case of AES, a secure communication channel can now be established.
+   In case of RSA, Alice and Bob cannot communicate with each other. Both would be able to encrypt messages, but neither of them
+   would be able to decrypt it again.
+
+Q: Additionally, when Mallory, an active attacker that can modify and destroy messages at will, joins, can we still build a secure system?
+A: In this scenario we have a man-in-the-middle-problem. The exchange of the symmetric AES-keys via RSA can be compromised, since neither
+   Alice nor Bob can be sure to be talking to the other party respectively. Normally Alice would generate an RSA key pair. Bob could then
+   use the public key to pass Alice the secret AES key he generated previously. After that, Alice would decrypt the AES-key using her private
+   RSA-key leading to both parties being in possession of the same symmetric AES-key. This does not work in this scenario: Mallory can intercept
+   Alice's public key so that Bob never receives it. She then would send Alice her secret AES-key to establish a connection between her and alice.
+   After that she sends Bob the public key of an RSA key pair she generated so that Bob passes her his AES-key, oblivious to the fact that he is not
+   talking to Alice. Now Alice and Bob believe to be communicateing with each other but Mallory as man-in-the-middle can read and manipulate all of the messages and even send messages on her own.
