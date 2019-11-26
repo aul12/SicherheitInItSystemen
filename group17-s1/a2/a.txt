@@ -15,7 +15,7 @@ A: In case of AES, a secure communication channel can now be established.
 
 Q: Additionally, when Mallory, an active attacker that can modify and destroy messages at will, joins, can we still build a secure system?
 A: In this scenario we have a man-in-the-middle-problem. The exchange of the symmetric AES-keys via RSA can be compromised, since neither
-   Alice nor Bob can be sure to be talking to the other party respectively. Normally Alice woudl generate an RSA key pair. Bob could then
+   Alice nor Bob can be sure to be talking to the other party respectively. Normally Alice would generate an RSA key pair. Bob could then
    use the public key to pass Alice the secret AES key he generated previously. After that, Alice would decrypt the AES-key using her private
    RSA-key leading to both parties being in possession of the same symmetric AES-key. This does not work in this scenario: Mallory can intercept
    Alice's public key so that Bob never receives it. She then would send Alice her secret AES-key to establish a connection between her and alice.
