@@ -1,0 +1,24 @@
+Installation Apache:
+Es wurde dieses Tutorial verwendet: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04-quickstart
+Apache wurde installiert mit: sudo apt install apache2
+Verifizierung der Installation mit: sudo systemctl status apache2
+
+Einrichten von HTTPS:
+Es wurde folgendes Tutorial verwendet: http://youtube.com/watch?v=bp22h1KTqyo
+CA erstellen: openssl genpkey -algorithm RSA -pkeyopt rsa_leygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out cakey.pem
+CA signieren: openssl req -new -x509 -key cakey.pem -out cacert.pem -days 1095
+Als nächstes wird eine Ordnerstruktur erstellt, die von SSH vorgesehen ist.
+Generiere private key: openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:65537 -out private-key.pem
+Erstelle sign request: openssl req -new -key private-key.pem -out certreq.csr
+Zertifikat erstellen: openssl ca -in certreq.csr -out cert.crt
+Als nächstes werden die Schlüssel in die ssl-Ordnerstruktur kopiert: sudo cp cert.crt /etc/ssl/certs/
+	sudo cp cert-ca.crt /etc/ssl/certs/
+	sudo cp private-key.pem /etc/ssl/private/
+Nun werden Konfigurationsdateien geändert. Kopien der geänderten Dateien befinden sich im Ordner.
+Aktiviere ssl-Mod: sudo a2enmod ssl
+Aktiviere ssl-Seite: sudo a2ensite default-ssl
+Server neu laden: sudo systemctl reload apache2
+Wenn man unter Firefox in den Konfigurationen den Wert von security.enterprise_roots.enabled auf true setzt, kann der Server mit https erreicht werden, ohne das Zertifikat als Ausnahme hinzuzufügen.
+Die Seite zeigt das Standard-Apache Html.
+
+
