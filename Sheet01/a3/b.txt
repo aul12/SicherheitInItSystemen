@@ -1,0 +1,2 @@
+# Python-Hash (See: https://pythonclock.org/)
+python2 hash.py plaintext.txt > b-hash.txt
