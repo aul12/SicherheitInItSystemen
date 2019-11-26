@@ -1,0 +1,2 @@
+The hash function does not consider the order of the characters in a line, thus the hash of the line "ab" is the same as the hash of the line "ba".
+This means hash collisions can easily be constructed, thus the hash function is not good cryptographic hash function.

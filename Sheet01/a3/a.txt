@@ -1,0 +1,5 @@
+# SHA-1
+sha1sum plaintext.txt > a-sha1.txt
+
+# SHA-2 (Assuming SHA-256, other variants of SHA-2 can be used by changing the command)
+sha256sum plaintext.txt > a-sha2.txt
