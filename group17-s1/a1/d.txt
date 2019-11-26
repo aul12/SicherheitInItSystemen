@@ -1,0 +1,13 @@
+Decrypt AES-encrypted file:
+$ openssl enc -aes-256-cbc -d -in a-enc-aes.txt -K EB46209563FC7F12A6F4EF32BF92CDFF965BE46427FAE16BFB49BC04A6E6F8C2 -iv 1CBE01D9411F49198D30EA0A490ED018
+
+-d to decrypt
+again, specify algorithm version, key and IV used to encrypt the file
+same key and IV are used since AES is a symmetric algorithm. 
+
+
+Decrypt RSA-encrypted file
+$ openssl rsautl -in b-enc-rsa.txt -decrypt -inkey private.pem
+
+specify -decrypt to decrypt :)
+Since the file was encrypted with the public key, private key is needed to decrypt it.

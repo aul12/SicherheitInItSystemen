@@ -1,0 +1,22 @@
+Create RSA key:
+$ openssl genrsa -out private.pem
+
+generates private key. It contains the public key which can be extracted using:
+pri
+$ openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+
+
+Encrypt file:
+$ openssl rsautl -in plaintext.txt -out b-enc-rsa.txt -encrypt -inkey public.pem -pubin
+
+-encrypt specify to encrypt. Public key needed, so specified with -inkey and -pubin
+
+
+Check if it worked:
+$ openssl rsautl -in b-enc-rsa.txt -decrypt -inkey private.pem
+
+
+Copy keys into one file:
+$ cp private.pem b-rsakeys.txt 
+head public.pem >> b-rsakeys.txt 
+
