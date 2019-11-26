@@ -1,6 +1,6 @@
 Q: If only Alice has some type of secret/private key, can she use it to give Bob her secret message?
 A: In case of AES, no. Both parties have to have the same secret key in order to en- and decrypt messages.
-   In case of RSA, also no. While Alice can use her private key to encrypt a message, it can be decrypted by ecveryone, including Eve
+   In case of RSA, also no. While Alice can use her private key to encrypt a message, it can be decrypted by everyone, including Eve
    since everyone has access to the public key. Therefor the message's content would not be kept secret.
 
 Q: If only Bob has some type of secret/private key, can Alice use it to give Bob her secret message?
