@@ -20,4 +20,4 @@ A: In this scenario we have a man-in-the-middle-problem. The exchange of the sym
    RSA-key leading to both parties being in possession of the same symmetric AES-key. This does not work in this scenario: Mallory can intercept
    Alice's public key so that Bob never receives it. She then would send Alice her secret AES-key to establish a connection between her and alice.
    After that she sends Bob the public key of an RSA key pair she generated so that Bob passes her his AES-key, obliviopus to the fact that he is not
-   talking to Alice. No Alice and Bob can communicate with each other but only with Mallory as man-in-the-middle who can in turn read all of the messages.
+   talking to Alice. Now Alice and Bob believe to be communicateing with each other but Mallory as man-in-the-middle can read and manipulate all of the messages and even send messages on her own.
