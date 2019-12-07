@@ -1,0 +1,10 @@
+Anders als Anwendungen wie SSH oder Internet-Browser versendet Ping Pakete auf IP-Ebene.
+Dazu ist es notwendig, RAW-Sockets zu öffnen, wozu eine besondere Berechtigung nötig ist. 
+In früheren Linux-Versionen wurde dieses Problem gelöst, indem Ping, mittels Setzen des UID-Bit, mit root-Rechten ausgeführt wurde. 
+Dadurch erhält Ping allerdings weit mehr Berechtigungen als es eigentlich benötigt, was ein zusätzliches Sicherheitsrisiko darstellt und in modernen Linux-Distributionen nicht mehr voreingestellt ist. 
+Stattdessen muss den Capability-Sets Perimitted und Effective die Capability CAP_NET_RAW hinzugefügt werden. 
+Das ist mit dem Befehl "sudo setcap cap_net_raw=ep /bin/ping" möglich.
+
+Das Set "Permitted" enthält alle Capabilites, die ein Executable haben kann. 
+Die Capabilities, die tatsächlich aktiv sind, befinden sich im "Effective"-Set. 
+Deshalb muss die gewünschte Capability beiden Sets hinzugefügt werden.
