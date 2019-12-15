@@ -1,0 +1,1 @@
+The bridge functionality can not be implemented using UNIX permissions, this functionality would require for a project to be owned by two different groups (the project users and the bridge users can not be the same group as the they should have different permissions).
