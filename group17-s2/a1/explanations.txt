@@ -1,0 +1,3 @@
+The bridge functionality can not be implemented using UNIX permissions, this functionality would require for a project to be owned by two different groups (the project users and the bridge users can not be the same group as the they should have different permissions).
+
+Additionally it is not possible to prevent the deletion of the project directory. This functionality would require that the directory has different permissions than the files in the directory. As there are no files in the directory at the time of project creation the different permissions can not be set.
