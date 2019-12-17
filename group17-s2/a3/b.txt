@@ -1,0 +1,15 @@
+Es wird für diese Aufgabe die Linux-Distribution Ubuntu 18.04.2 LTS verwendet.
+Im Linux Manual (linux.net/man/7/capabilities) gibt es für die Capability CAP_NET_BIND_SERVICE folgende Beschreibung: "Bind a socket to Internet domain privileged ports (port numbers less than 1024)".
+Um Port 80 abzuhören muss netcat offensichtlich diese capability zugewiesen werden.
+Der Datei /bin/netcat können keine Capabilites zugewiesen werden, da es sich dabei nicht um eine normale Datei, sondern einen symbolischen Link handelt. 
+Die Datei, der die Capability zugeweisen werden muss, ist /bin/nc.openbsd.
+Der vollständige Befehl zum Hinzufügen der Capability zu netcat ist daher: "sudo setcap cap_net_bind_service=ep $(readlink -f $(which netcat))".
+Nach dem Ausführen von netcat mit dem Befehl "netcat -l 80" erzeugte das Öffnen eines Browsers auf 127.0.0.1 die Ausgabe:
+GET / HTTP/1.1
+Host: 127.0.0.1
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:70.0) Gecko/20100101 Firefox/70.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
