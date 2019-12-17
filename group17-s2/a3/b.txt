@@ -2,7 +2,7 @@ Im Manual Linux (linux.net/man/7/capabilities) gibt es für die Capability CAP_N
 Um Port 80 abzuhören muss netcat offensichtlich diese capability zugewiesen werden.
 Der Datei /bin/netcat können keine Capabilites zugewiesen werden, da es sich dabei nicht um eine normale Datei, sondern einen symbolischen Link handelt. 
 Die Datei, der die Capability zugeweisen werden muss, ist /bin/nc.openbsd.
-Der vollständige Befehl zum Hinzufügen der Capability zu netcat ist daher: "sudo setcap cap_net_bind_service=ep /bin/nc.openbsd".
+Der vollständige Befehl zum Hinzufügen der Capability zu netcat ist daher: "sudo setcap cap_net_bind_service=ep $(readlink -f $(which netcat))".
 Nach dem Ausführen von netcat mit dem Befehl "netcat -l 80" erzeugte das Öffnen eines Browsers auf 127.0.0.1 die Ausgabe:
 GET / HTTP/1.1
 Host: 127.0.0.1
