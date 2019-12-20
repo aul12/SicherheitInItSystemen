@@ -7,4 +7,4 @@ where +ep stands for adding effective and permitted capability.
 
 By issuing the read capability to bash users can see all projects and files (could not be reproduced: bash: cd: projects/: Permission denied)
 
-By searching for dependencies with a C program, the capability to read files only has to be granted to the program and not to bash. Thus users won't be able to see files and projects.
+By searching for dependencies with a C program, the capability to read files only has to be granted to the program and not to the shell. Thus users won't be able to see files and projects.
