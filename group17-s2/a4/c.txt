@@ -1,4 +1,4 @@
-The capability to read files and directories needs to be given to bash and to cat. Otherwise cp as well as iterating through directories doesn't work (bash), neither does opening the dependency files (cat). The capability is set by
+The capability to read files and directories needs to be given to the shell (bash in this case) and to cat. Otherwise cp as well as iterating through directories doesn't work (bash), neither does opening the dependency files (cat). The capability is set by
 
 $ sudo setcap cap_dac_read_search+ep /bin/bash
 $ sudo setcap cap_dac_read_search+ep /bin/cat
