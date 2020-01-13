@@ -1,0 +1,10 @@
+For the address of the buffer (which contains the shell-code):
+load the debug information with gdb:
+  gdb /opt/protostar/bin/stack5
+In the gdb console run
+  break 7
+  run
+  p &buffer
+to get the address of the buffer (0xbffff838 in this case)
+Then change the return address of the stack, the offset has been found experimentally (in this case 13 bytes)
+0xbffffd38 (little endian) -> 0x38 0xfd 0xff 0xbf

