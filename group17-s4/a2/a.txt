@@ -1,0 +1,13 @@
+Der MD5 kann mit dem Linux-Befehl "md5sum task2pcap1.pcap" überprüft werden. 
+
+Mit dem Filter "ip.addr == 192.168.1.158" werden die aufgezeichneten Paketen nach Paketen von und zu Ann gefilter (Ann's IP-Addresse ist auf dem Blatt angegeben).
+Rechtsklick auf das erste Menü, dann wählen von folgen>TCP Stream öffnet ein Fenster mit dem Text in der Datei IM_Communication.txt.
+
+Hier werden drei Nachrichten im Klartext übermittelt. Die erste Nachricht der Konversation lautet:
+"Here's the secret recipe... I just downloaded it from the file server. Just copy to a thumb drive and you're good to go &gt;:-)"
+Der Name der versendeten Datei ebenfalls naheliegend: "recipe.docx"
+
+Es ist bekannt, dass es sich um eine IM-Kommunikation handelt. 
+Wikipedia erwähnt in diesem Zusammenhang das AIM-Protokoll.
+Wenn die Pakete von Port 51128 als AIM decodiert werden, kann den Paketdetails  von Paket Nummer 25 unter "AIM Messaging, Outgoing" > "Buddy" der Benutzername des Partners entnommen werden: "Sec558user1".
+
