@@ -1,3 +1,23 @@
 + used hint to extract file from password protected archive:
 	+ md5-hash of passw0rd:
 	+ bed128365216c019988915ed3add75fb
+
++ MD5-Checksumme überprüft mit "md5sum". 
+
+Was vermutich passiert:
++ Die ersten Pakete enthalten einen Einlofvorgang mit dem Benutzernamen "user" und dem Passwort "password".
++ Der passive Modus von FTP wird aktiviert.
++ Es wird in das Verzeichnis "files" gewechselt.
++ Es wird ins Verzeichnis "private" gewechselt.
++ Es wird eine Datei "key.zip" heruntergeladen und die Verbindung beendet.
++ Danach wird zweimal eine Verbindung aufgebaut, über die jeweils verschlüsselte Daten versendet werden, wahrscheinlich unter Nutzung des vorher heruntergeladenen private key.
+
++ Paket Nr 4 sagt aus, dass der Client mit einem FTP-Server kommuiziert, der private keys überträgt.
+
++ Wir haben Paket 55, also die übertragene Datei, als raw data in ein zip-File gespeichert, mittels rechtsklick>follow>TCP stream>Show and save data as>raw und dann save as... als "key.zip". Wir haben mit Informationen aus Wikipedia die Header-Signatur überprüft. Das so entstandene Archiv lässt sich öffnen und enthält einen Ordner names "user". Wenn man die Daten aber extrahieren will, erscheint eine Fehlermeldung.
+Im Archiv befindet sich die Struktur: user>ftp>files>private>server_key.pm
+Der Inhalt der Datei server_key.pm ist unter diesem Namen im Abgabeordner enthalten. Es enthält einen RSA private key.
+
++ Als nächstes folgen wir dem TCP-Stream der ersten verschlüsselten Übertragung und speichern die letzte Serversetige Nachricht in Rohdaten
+
+
