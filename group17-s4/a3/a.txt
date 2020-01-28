@@ -1,0 +1,3 @@
++ used hint to extract file from password protected archive:
+	+ md5-hash of passw0rd:
+	+ bed128365216c019988915ed3add75fb
