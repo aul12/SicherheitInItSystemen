@@ -1,35 +1,39 @@
-+ used hint to extract file from password protected archive:
++ Mit Hinweis konnte Capture-Datei aus Verzeichnis extrahiert werden:
 	+ md5-hash of passw0rd:
 	+ bed128365216c019988915ed3add75fb
 
 + MD5-Checksumme überprüft mit "md5sum". 
 
-Was vermutich passiert:
-+ Die ersten Pakete enthalten einen Einlofvorgang mit dem Benutzernamen "user" und dem Passwort "password".
-+ Der passive Modus von FTP wird aktiviert.
-+ Es wird in das Verzeichnis "files" gewechselt.
-+ Es wird ins Verzeichnis "private" gewechselt.
-+ Es wird eine Datei "key.zip" heruntergeladen und die Verbindung beendet.
-+ Danach wird zweimal eine Verbindung aufgebaut, über die jeweils verschlüsselte Daten versendet werden, wahrscheinlich unter Nutzung des vorher heruntergeladenen private key.
++ Erstmal versucht, die Kommunikation zu verstehen. Was vermutich passiert:
+	+ Paket Nr 4 sagt aus, dass der Client mit einem FTP-Server kommuiziert, der private keys überträgt.
+	+ Die ersten Pakete enthalten einen Loginvorgang mit dem Benutzernamen "user" und dem Passwort "password".
+	+ Der passive Modus von FTP wird aktiviert.
+	+ Es wird in das Verzeichnis "files" gewechselt.
+	+ Es wird ins Verzeichnis "private" gewechselt.
+	+ Es wird eine Datei "key.zip" heruntergeladen, die Verbindung wird beendet.
 
-+ Paket Nr 4 sagt aus, dass der Client mit einem FTP-Server kommuiziert, der private keys überträgt.
+	+ Es wird zweimal eine verschluesselte Verbindung aufgebaut, wahrscheinlich unter Nutzung des vorher heruntergeladenen private key.
+	+ Das zweite Mal werden viele Daten uebermittelt, evtl. wird eine Datei heruntergeladen.
 
-+ Wir haben Paket 55, also die übertragene Datei, als raw data in ein zip-File gespeichert, mittels rechtsklick>follow>TCP stream>Show and save data as>raw und dann save as... als "key.zip". Wir haben mit Informationen aus Wikipedia die Header-Signatur überprüft. Das so entstandene Archiv lässt sich öffnen und enthält einen Ordner names "user". Wenn man die Daten aber extrahieren will, erscheint eine Fehlermeldung.
-Im Archiv befindet sich die Struktur: user>ftp>files>private>server_key.pm
-Der Inhalt der Datei server_key.pm ist unter diesem Namen im Abgabeordner enthalten. Es enthält einen RSA private key.
 
-+ Als nächstes folgen wir dem TCP-Stream der ersten verschlüsselten Übertragung und wollen die letzte serversetige Nachricht in Rohdaten speichern. Es werden jedoch alle Nachrichten des Streams abgespeichert.
-+ Die Idee war, mittels openssl die Nachrichten zu entschluesseln, da wir ja den private key besitzen. Das schlaegt jedoch fehl, nicht zuletzt, da wir nicht genau wissen, in welchem Format die Nachrichten vorliegen.
++ Wir haben Paket 55, also die übertragene Datei, als raw data in ein zip-File gespeichert, mittels rechtsklick>follow>TCP stream>Show and save data as>raw und dann save as... als "key.zip". 
++ Wir haben mit Informationen aus Wikipedia die Header-Signatur überprüft. Das so entstandene Archiv lässt sich öffnen und enthält einen Ordner names "user". Wenn man die Daten aber extrahieren will, erscheint eine Fehlermeldung.
++ Im Archiv befindet sich die Struktur: user>ftp>files>private>server_key.pm (war auch schon aus Hex-Editor bekannt)
++ Die Datei server_key.pm konnte geoeffnet werden und ist unter diesem Namen im Abgabeordner enthalten. Sie enthält einen RSA private key.
 
-+ Neue Idee: Nachrichten direkt in wireshark entschluesseln.
++ Wir folgen dem TCP-Stream der ersten verschlüsselten Übertragung und wollen die letzte serversetige Nachricht in Rohdaten speichern. Es werden jedoch alle Nachrichten des Streams abgespeichert.
++ Die Idee war, mittels openssl die Nachrichten zu entschluesseln, da wir ja den private key besitzen. Das schlaegt jedoch fehl, nicht zuletzt, da wir nicht genau wissen, in welchem Dateiformat die Nachrichten vorliegen.
+
++ Neue Idee: Nachrichten direkt in wireshark entschluesseln, nach:
 	+ https://wiki.wireshark.org/TLS
 	+ entsprechende Einstellungen vornehmen und server_key.pub ueber 'add new keyfile' zu RSA keys hinzufuegen.
 	+ unten auf Reiter 'Decrypted TLS' gehen.
 + Follow TLS Stream (4) > Aus der Kommunikation zwischen Client und Server wird deutlich, dass der Server mittels html ein Bild schickt: flag.jpg
 
-+ Annahme: Darauffolgender Stream enthaelt jpg.
++ Annahme: Darauffolgender Stream enthaelt jpg-Datei.
 + Versuch, Bild mittels wireshark zu extrahieren. Nach einiger Recherche aufgegeben.
-+ Stattdessen: JPEG header in hex-Daten gefunden: https://de.wikipedia.org/wiki/JPEG_File_Interchange_Format
-+ Also: Bild startet nach html-Code (mit FF D8) und endet mit dem Stream (FF D9)
-+ relevanter Bereich kopiert (raw) und auf https://tomeko.net/online_tools/hex_to_file.php?lang=en in .jpg-file konvertiert.
-+ Das Ergebnis ist als flag.jpg beigefuegt.
++ Stattdessen: JPEG header in hex-Daten gefunden (https://de.wikipedia.org/wiki/JPEG_File_Interchange_Format)
++ Also: Bild beginnt nach html-Code (mit FF D8) und endet mit dem Stream (FF D9).
++ Speichern des Textes als .jpg funktioniert nicht, schade.
++ Relevanter Bereich wird kopiert (als hex/raw) und auf https://tomeko.net/online_tools/hex_to_file.php?lang=en in .jpg-file konvertiert.
++ Das Ergebnis laesst sich oeffnen und ist als flag.jpg beigefuegt.
