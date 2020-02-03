@@ -1,0 +1,14 @@
++ Searching String 'ann', thus finding the relevant entries:
+
++Ann email address: sneakyg33k@aol.com
+	80	83.811862	192.168.1.159	64.12.102.142	SMTP/IMF	59	from: "Ann Dercover" <sneakyg33k@aol.com>, subject: lunch next week,  (text/plain) (text/html)
+
++ Email body: Sorry-- I can't do lunch next week after all. Heading out of town. Another time! -Ann
+	in line: 78	83.810602	192.168.1.159	64.12.102.142	SMTP	1402	C: DATA fragment, 1348 bytes
+	and: 
+	Hi sweetheart! Bring your fake passport and a bathing suit. Address
+	attached. love, Ann
+	557	245.187450	192.168.1.159	64.12.102.142	SMTP/IMF	1317	from: "Ann Dercover" <sneakyg33k@aol.com>, subject: rendezvous,  (text/plain) (text/html)
+
++ attachmennt name was found by following SMTP communication: secretrendezvous.docx	
+	in line: 140	243.887693	192.168.1.159	64.12.102.142	SMTP	1514	C: DATA fragment, 1460 bytes
