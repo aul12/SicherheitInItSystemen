@@ -1,0 +1,9 @@
+As stated in the exercise description an SQL injection attack is to be attempted.
+
+Looking at the source code of the website reveals the login page:
+https://www.hackthissite.org/missions/realistic/2/update.php
+username should be "admin".
+The sql vulnerability is not apparent, as single quote entries don't produce an error.
+After some trial and error however (and some SQL errors), it turned out that password:
+x' or 1=1-'
+did the trick.

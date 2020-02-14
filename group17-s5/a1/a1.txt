@@ -1,0 +1,17 @@
+The aim is to manipulate the voting system by adding a higher score for the requested band (Raging Inferno).
+
+This can be done by right clicking on the respective drop down menu and selecting "inspect element".
+The html code of the site appears - and settings can be changed (only in the browser, obviously).
+<select name="vote">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+
+Since the top ranking band has a score of 23, in we change
+<option value="5">5</option>
+to
+<option value="25">5</option>
+and hit "vote".
