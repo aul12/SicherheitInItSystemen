@@ -1,0 +1,4 @@
+The old website can be found by analyzing the sourcecode; scrolling all the way down reveals:
+https://www.hackthissite.org/missions/realistic/3/oldindex.html
+
+Directory traversal has to be applied, probably through readpoem.php?... (how exactly?)
