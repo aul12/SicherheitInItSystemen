@@ -1,0 +1,17 @@
+We need to find a hash which then has to be cracked.
+In the news section of the website there is the first hint:
+9/15/03 - Google was grabbing links it shouldn't be so I have taken extra precautions.
+
+This is usually done by adding a robots.txt file to the root directory of the website. And sure enough:
+https://www.hackthissite.org/missions/realistic/5/robots.txt
+It says:
+
+User-agent: *
+Disallow: /lib
+Disallow: /secret
+
+meaning, that these directories should not be listed. /secret sounds interesting!
+It contains a file called admin.bak.php which contains this:
+error matching hash 0c95c956d133082576de45761baa2d7c
+
+We found the hash!
