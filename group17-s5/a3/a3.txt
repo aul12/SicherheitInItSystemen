@@ -1,4 +1,10 @@
 The old website can be found by analyzing the sourcecode; scrolling all the way down reveals:
 https://www.hackthissite.org/missions/realistic/3/oldindex.html
 
-Directory traversal has to be applied, probably through readpoem.php?... (how exactly?)
+The site 
+https://www.hackthissite.org/missions/realistic/3/submitpoems.php
+allows user input.
+The goal is to restore the original site (oldindex.html -> index.html). This can be done by copying the source code of oldindex.html and saving it as a poem titled
+../index.html
+
+This is a directory traversal attack: The poems are stored in subdirectory (we had to guess that, but it's logical), so by typing in '..' we get to the parent directory, where index.html is located. The content of the 'poem' field is be stored as index.html, thus overriding the file and completing the mission.
